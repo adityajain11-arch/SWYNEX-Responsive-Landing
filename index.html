@@ -3,891 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aditya's Tech Hub | BCA Web Project</title>
-    <!-- Simple standard font and FontAwesome for icons -->
+    <title>SWYNEX - Student Portfolio & Landing Page</title>
+    <!-- Tailwind CSS CDN for quick styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4f46e5',
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* CSS Variables for Light / Dark Mode switching */
-        :root {
-            --bg-color: #f4f7f6;
-            --card-bg: #ffffff;
-            --text-color: #2c3e50;
-            --text-secondary: #666666;
-            --primary-color: #2563eb;
-            --primary-hover: #1d4ed8;
-            --accent-color: #059669;
-            --border-color: #d1d5db;
-            --nav-bg: #1e293b;
-            --nav-text: #ffffff;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --gradient-hero: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-        }
-
-        [data-theme="dark"] {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-color: #f8fafc;
-            --text-secondary: #94a3b8;
-            --primary-color: #3b82f6;
-            --primary-hover: #60a5fa;
-            --accent-color: #10b981;
-            --border-color: #334155;
-            --nav-bg: #0f172a;
-            --nav-text: #f8fafc;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-            --gradient-hero: linear-gradient(135deg, #0284c7 0%, #0f172a 100%);
-        }
-
-        /* Base Styles */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        /* Container helper */
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        /* Header & Navigation */
-        header {
-            background-color: var(--nav-bg);
-            color: var(--nav-text);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo span {
-            color: #60a5fa;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .nav-link {
-            color: #e2e8f0;
-            font-size: 0.95rem;
-            padding: 5px 10px;
-            border-radius: 4px;
-        }
-
-        .nav-link:hover {
-            color: #ffffff;
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        /* Theme Toggle Button */
-        .theme-btn {
-            background: transparent;
-            border: 1px solid #64748b;
-            color: #ffffff;
-            padding: 6px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .theme-btn:hover {
-            background: rgba(255,255,255,0.1);
-        }
-
-        /* Hamburger Toggle */
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: #ffffff;
-            font-size: 1.5rem;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: var(--gradient-hero);
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-            border-bottom: 5px solid var(--primary-color);
-        }
-
-        .hero-content {
-            max-width: 750px;
-            margin: 0 auto;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .hero h1 {
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.05rem;
-            margin-bottom: 25px;
-            opacity: 0.95;
-        }
-
-        .hero-btns {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 22px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            border: none;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background-color: #22c55e;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #16a34a;
-        }
-
-        .btn-secondary {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 1px solid white;
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* General Section Styling */
-        section {
-            padding: 50px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .section-title h2 {
-            font-size: 1.8rem;
-            color: var(--text-color);
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            display: block;
-            width: 50%;
-            height: 3px;
-            background-color: var(--primary-color);
-            margin: 8px auto 0;
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-top: 5px;
-        }
-
-        /* Projects Section & Filters */
-        .filter-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-            padding: 6px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background-color: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .project-card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card:hover {
-            transform: translateY(-3px);
-            transition: transform 0.2s ease;
-        }
-
-        .project-img {
-            width: 100%;
-            height: 160px;
-            background-color: #cbd5e1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: #475569;
-        }
-
-        .project-body {
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .project-title {
-            font-size: 1.15rem;
-            margin-bottom: 8px;
-        }
-
-        .project-desc {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            margin-bottom: 15px;
-            flex-grow: 1;
-        }
-
-        .project-tags {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-
-        .tag {
-            background-color: rgba(37, 99, 235, 0.1);
-            color: var(--primary-color);
-            font-size: 0.75rem;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-
-        .project-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid var(--border-color);
-            padding-top: 10px;
-            font-size: 0.85rem;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
-            text-align: center;
-        }
-
-        .skill-item {
-            background-color: var(--card-bg);
-            padding: 20px 10px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow);
-        }
-
-        .skill-item i {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: var(--primary-color);
-        }
-
-        .skill-item h4 {
-            font-size: 0.95rem;
-        }
-
-        /* About & Education */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
-        .about-card {
-            background-color: var(--card-bg);
-            padding: 25px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow);
-        }
-
-        .about-card h3 {
-            margin-bottom: 12px;
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .about-card p {
-            font-size: 0.92rem;
-            color: var(--text-secondary);
-            margin-bottom: 10px;
-        }
-
-        .timeline-list {
-            list-style: none;
-            margin-top: 10px;
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 12px;
-            font-size: 0.9rem;
-        }
-
-        .timeline-item::before {
-            content: "•";
-            color: var(--primary-color);
-            font-weight: bold;
-            font-size: 1.2rem;
-            position: absolute;
-            left: 0;
-            top: -2px;
-        }
-
-        /* Contact Form */
-        .contact-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow);
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-size: 0.9rem;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 0.95rem;
-        }
-
-        .submit-btn:hover {
-            background-color: var(--primary-hover);
-        }
-
-        .alert-message {
-            display: none;
-            padding: 12px;
-            background-color: #d1fae5;
-            color: #065f46;
-            border: 1px solid #a7f3d0;
-            border-radius: 5px;
-            margin-top: 15px;
-            font-size: 0.9rem;
-            text-align: center;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--nav-bg);
-            color: #94a3b8;
-            padding: 30px 0;
-            text-align: center;
-            font-size: 0.88rem;
-        }
-
-        .footer-socials {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 12px;
-        }
-
-        .footer-socials a {
-            color: #f8fafc;
-            font-size: 1.2rem;
-        }
-
-        .footer-socials a:hover {
-            color: #60a5fa;
-        }
-
-        /* Responsive Breakpoints */
-        @media (max-width: 768px) {
-            .hamburger {
-                display: block;
-            }
-
-            .nav-menu {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--nav-bg);
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 15px 20px;
-                display: none;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            }
-
-            .nav-menu.active {
-                display: flex;
-            }
-
-            .nav-menu li {
-                width: 100%;
-                margin: 5px 0;
-            }
-
-            .hero h1 {
-                font-size: 1.7rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 font-sans">
 
-    <!-- Header & Navigation Bar -->
-    <header>
-        <div class="container navbar">
-            <div class="logo">
-                <i class="fa-solid fa-code"></i> Aditya's <span>BCA Tech Hub</span>
-            </div>
-
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#about" class="nav-link">About Me</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-
-            <div class="nav-actions">
-                <button class="theme-btn" id="themeToggle" title="Toggle Theme">
-                    <i class="fa-solid fa-moon" id="themeIcon"></i>
-                    <span id="themeText">Dark</span>
-                </button>
-                <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
+    <!-- NAVIGATION -->
+    <nav class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="bg-indigo-600 text-white p-2 rounded-lg font-bold text-lg"><i class="fa-solid fa-code"></i></div>
+                    <span class="text-xl font-extrabold tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">SWYNEX</span>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 font-medium">
+                    <a href="#hero" class="hover:text-indigo-600 transition">Home</a>
+                    <a href="#projects" class="hover:text-indigo-600 transition">Projects</a>
+                    <a href="#skills" class="hover:text-indigo-600 transition">Skills</a>
+                    <a href="#about" class="hover:text-indigo-600 transition">About</a>
+                    <a href="#contact" class="hover:text-indigo-600 transition">Contact</a>
+                    <button id="darkModeToggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                        <i class="fa-solid fa-moon dark:hidden"></i>
+                        <i class="fa-solid fa-sun hidden dark:block text-yellow-400"></i>
+                    </button>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden space-x-3">
+                    <button id="darkModeToggleMobile" class="p-2 rounded-full bg-gray-100 dark:bg-gray-800">
+                        <i class="fa-solid fa-moon dark:hidden"></i>
+                        <i class="fa-solid fa-sun hidden dark:block text-yellow-400"></i>
+                    </button>
+                    <button id="menuBtn" class="text-gray-700 dark:text-gray-300 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
             </div>
         </div>
-    </header>
+        <!-- Mobile Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-2 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+            <a href="#hero" class="block py-2 hover:text-indigo-600">Home</a>
+            <a href="#projects" class="block py-2 hover:text-indigo-600">Projects</a>
+            <a href="#skills" class="block py-2 hover:text-indigo-600">Skills</a>
+            <a href="#about" class="block py-2 hover:text-indigo-600">About</a>
+            <a href="#contact" class="block py-2 hover:text-indigo-600">Contact</a>
+        </div>
+    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <span class="hero-badge"><i class="fa-solid fa-graduation-cap"></i> BCA Project 2026</span>
-            <h1>Bachelor of Computer Applications Portfolio</h1>
-            <p>Hi, I'm Aditya! A student passionate about Web Development, Python scripting, and database management. Welcome to my college project showcase!</p>
-            <div class="hero-btns">
-                <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-folder-open"></i> View My Work</a>
-                <a href="#contact" class="btn btn-secondary"><i class="fa-solid fa-envelope"></i> Get In Touch</a>
+    <!-- HERO SECTION -->
+    <section id="hero" class="py-20 md:py-32 flex items-center justify-center text-center px-4">
+        <div class="max-w-3xl mx-auto space-y-6">
+            <span class="px-4 py-1.5 text-xs font-semibold uppercase tracking-wider bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 rounded-full">BCA Student & Web Dev Learner</span>
+            <h1 class="text-4xl sm:text-6xl font-black tracking-tight">Hi, I'm a Developer building things for the <span class="text-indigo-600">Web</span></h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto">Welcome to my responsive landing page project built with HTML, Tailwind CSS, and JavaScript. Explore my projects and get in touch!</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+                <a href="#projects" class="px-8 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium shadow-lg shadow-indigo-500/30 transition">View Projects</a>
+                <a href="#contact" class="px-8 py-3 rounded-xl border border-gray-300 dark:border-gray-700 hover:border-indigo-600 font-medium transition">Contact Me</a>
             </div>
         </div>
     </section>
 
-    <!-- Projects / Coursework Section -->
-    <section id="projects">
-        <div class="container">
-            <div class="section-title">
-                <h2>My Projects & Coursework</h2>
-                <p>A collection of mini-projects built during my BCA semester lab work</p>
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="py-16 px-4 bg-gray-100/50 dark:bg-gray-800/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold tracking-tight">My Projects</h2>
+                <p class="text-gray-600 dark:text-gray-400 mt-2">Filter through some of my recent college and practice work.</p>
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap justify-center gap-2 mt-6">
+                    <button class="filter-btn px-4 py-1.5 rounded-lg bg-indigo-600 text-white text-sm font-medium transition" data-filter="all">All</button>
+                    <button class="filter-btn px-4 py-1.5 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-sm font-medium hover:bg-gray-50 transition" data-filter="web">Web App</button>
+                    <button class="filter-btn px-4 py-1.5 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-sm font-medium hover:bg-gray-50 transition" data-filter="design">UI/UX</button>
+                </div>
             </div>
 
-            <!-- Filter Buttons -->
-            <div class="filter-container">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="web">Web Dev</button>
-                <button class="filter-btn" data-filter="python">Python</button>
-                <button class="filter-btn" data-filter="database">Database</button>
-            </div>
-
-            <!-- Project Cards -->
-            <div class="projects-grid" id="projectsGrid">
-                
+            <!-- Project Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Project 1 -->
-                <div class="project-card" data-category="web">
-                    <div class="project-img" style="background: #dbeafe;">
-                        <i class="fa-solid fa-utensils" style="color: #2563eb;"></i>
+                <div class="project-card bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition" data-category="web">
+                    <div class="h-48 bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center text-indigo-500 text-4xl font-bold">
+                        <i class="fa-solid fa-laptop-code"></i>
                     </div>
-                    <div class="project-body">
-                        <h3 class="project-title">Hostel Mess Dashboard</h3>
-                        <p class="project-desc">A simple frontend interface to track daily hostel mess menus, meal feedback, and monthly bill calculations.</p>
-                        <div class="project-tags">
-                            <span class="tag">HTML</span>
-                            <span class="tag">CSS</span>
-                            <span class="tag">JavaScript</span>
-                        </div>
-                        <div class="project-footer">
-                            <span><i class="fa-regular fa-clock"></i> Sem 3 Project</span>
-                            <a href="#" class="nav-link" style="color: var(--primary-color); padding: 0;"><i class="fa-brands fa-github"></i> Demo</a>
-                        </div>
+                    <div class="p-6 space-y-3">
+                        <span class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Web App</span>
+                        <h3 class="text-xl font-bold">Mess Dashboard</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">A hostel mess management system dashboard built with React and Tailwind CSS.</p>
+                        <a href="#" class="inline-block pt-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">View Repository &rarr;</a>
                     </div>
                 </div>
-
                 <!-- Project 2 -->
-                <div class="project-card" data-category="python">
-                    <div class="project-img" style="background: #fef3c7;">
-                        <i class="fa-solid fa-book-open" style="color: #d97706;"></i>
+                <div class="project-card bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition" data-category="design">
+                    <div class="h-48 bg-purple-50 dark:bg-purple-950/50 flex items-center justify-center text-purple-500 text-4xl font-bold">
+                        <i class="fa-solid fa-palette"></i>
                     </div>
-                    <div class="project-body">
-                        <h3 class="project-title">Student Notes Tracker</h3>
-                        <p class="project-desc">A Python Tkinter GUI app designed to categorize lecture notes, search keywords, and store PDF links locally.</p>
-                        <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Tkinter</span>
-                            <span class="tag">SQLite</span>
-                        </div>
-                        <div class="project-footer">
-                            <span><i class="fa-regular fa-clock"></i> Sem 4 Lab Work</span>
-                            <a href="#" class="nav-link" style="color: var(--primary-color); padding: 0;"><i class="fa-brands fa-github"></i> Code</a>
-                        </div>
+                    <div class="p-6 space-y-3">
+                        <span class="text-xs font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider">UI/UX Design</span>
+                        <h3 class="text-xl font-bold">Eco Packaging App</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Figma wireframes and design system for a sustainable seed-packaging startup concept.</p>
+                        <a href="#" class="inline-block pt-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">View Figma &rarr;</a>
                     </div>
                 </div>
-
                 <!-- Project 3 -->
-                <div class="project-card" data-category="web">
-                    <div class="project-img" style="background: #e0e7ff;">
-                        <i class="fa-solid fa-images" style="color: #4f46e5;"></i>
+                <div class="project-card bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition" data-category="web">
+                    <div class="h-48 bg-blue-50 dark:bg-blue-950/50 flex items-center justify-center text-blue-500 text-4xl font-bold">
+                        <i class="fa-solid fa-bolt"></i>
                     </div>
-                    <div class="project-body">
-                        <h3 class="project-title">Interactive Image Gallery</h3>
-                        <p class="project-desc">A lightbox photo gallery featuring filtering mechanisms and image modal previews using pure JavaScript.</p>
-                        <div class="project-tags">
-                            <span class="tag">HTML5</span>
-                            <span class="tag">CSS Grid</span>
-                            <span class="tag">JS DOM</span>
-                        </div>
-                        <div class="project-footer">
-                            <span><i class="fa-regular fa-clock"></i> Web Lab #2</span>
-                            <a href="#" class="nav-link" style="color: var(--primary-color); padding: 0;"><i class="fa-brands fa-github"></i> Demo</a>
-                        </div>
+                    <div class="p-6 space-y-3">
+                        <span class="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Web Automation</span>
+                        <h3 class="text-xl font-bold">Tatkal Prompt Tool</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">A script and workflow repository created to streamline form automation.</p>
+                        <a href="#" class="inline-block pt-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">View Repository &rarr;</a>
                     </div>
-                </div>
-
-                <!-- Project 4 -->
-                <div class="project-card" data-category="database">
-                    <div class="project-img" style="background: #dcfce7;">
-                        <i class="fa-solid fa-database" style="color: #16a34a;"></i>
-                    </div>
-                    <div class="project-body">
-                        <h3 class="project-title">Library Management System</h3>
-                        <p class="project-desc">A relational database project using MySQL and C++ CLI for managing book issues and fine collections.</p>
-                        <div class="project-tags">
-                            <span class="tag">C++</span>
-                            <span class="tag">MySQL</span>
-                            <span class="tag">DBMS</span>
-                        </div>
-                        <div class="project-footer">
-                            <span><i class="fa-regular fa-clock"></i> DBMS Assignment</span>
-                            <a href="#" class="nav-link" style="color: var(--primary-color); padding: 0;"><i class="fa-brands fa-github"></i> Code</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills">
-        <div class="container">
-            <div class="section-title">
-                <h2>Skills & Technologies</h2>
-                <p>Languages and tools I'm studying and building projects with</p>
-            </div>
-
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <i class="fa-brands fa-html5"></i>
-                    <h4>HTML5</h4>
-                </div>
-                <div class="skill-item">
-                    <i class="fa-brands fa-css3-alt"></i>
-                    <h4>CSS3 / Flexbox</h4>
-                </div>
-                <div class="skill-item">
-                    <i class="fa-brands fa-js"></i>
-                    <h4>JavaScript</h4>
-                </div>
-                <div class="skill-item">
-                    <i class="fa-brands fa-python"></i>
-                    <h4>Python Basics</h4>
-                </div>
-                <div class="skill-item">
-                    <i class="fa-solid fa-database"></i>
-                    <h4>SQL / MySQL</h4>
-                </div>
-                <div class="skill-item">
-                    <i class="fa-solid fa-code"></i>
-                    <h4>C++ / OOPs</h4>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Me & Education -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Me & Education</h2>
-                <p>My academic background and coding journey</p>
-            </div>
-
-            <div class="about-content">
-                <div class="about-card">
-                    <h3><i class="fa-solid fa-user-degree"></i> My Profile</h3>
-                    <p>I am a final-year BCA student interested in computer programming and web technologies. I enjoy experimenting with HTML, CSS, JavaScript, and vibe coding concepts.</p>
-                    <p>My primary focus right now is mastering full-stack web development and preparing for campus placement drives in 2026.</p>
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center space-y-8">
+            <h2 class="text-3xl font-bold tracking-tight">Core Skills & Tech Stack</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+                    <i class="fa-brands fa-html5 text-3xl text-orange-500 mb-2"></i>
+                    <p class="font-semibold text-sm">HTML5 / CSS3</p>
                 </div>
-
-                <div class="about-card">
-                    <h3><i class="fa-solid fa-graduation-cap"></i> Education Timeline</h3>
-                    <ul class="timeline-list">
-                        <li class="timeline-item">
-                            <strong>Bachelor of Computer Applications (BCA)</strong><br>
-                            ABC University of Technology (2023 - 2026)<br>
-                            <small>Current CGPA: 8.2</small>
-                        </li>
-                        <li class="timeline-item">
-                            <strong>Senior Secondary Education (Class XII)</strong><br>
-                            Central High School (2022 - 2023)<br>
-                            <small>Stream: Science with Computer Science</small>
-                        </li>
-                    </ul>
+                <div class="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+                    <i class="fa-brands fa-js text-3xl text-yellow-400 mb-2"></i>
+                    <p class="font-semibold text-sm">JavaScript</p>
+                </div>
+                <div class="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+                    <i class="fa-brands fa-react text-3xl text-cyan-400 mb-2"></i>
+                    <p class="font-semibold text-sm">React / Tailwind</p>
+                </div>
+                <div class="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+                    <i class="fa-brands fa-git-alt text-3xl text-red-500 mb-2"></i>
+                    <p class="font-semibold text-sm">Git & GitHub</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Contact Me</h2>
-                <p>Have a question or feedback regarding my college project?</p>
-            </div>
-
-            <div class="contact-container">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" class="form-control" placeholder="College Inquiry / Feedback" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" class="form-control" placeholder="Write your message here..." required></textarea>
-                    </div>
-
-                    <button type="submit" class="submit-btn"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
-                    
-                    <div class="alert-message" id="alertMessage">
-                        <i class="fa-solid fa-circle-check"></i> Thank you! Your message has been recorded (College Demo Mode).
-                    </div>
-                </form>
-            </div>
+    <!-- ABOUT / EDUCATION SECTION -->
+    <section id="about" class="py-16 px-4 bg-gray-100/50 dark:bg-gray-800/50">
+        <div class="max-w-3xl mx-auto text-center space-y-4">
+            <h2 class="text-3xl font-bold tracking-tight">About This Project</h2>
+            <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                Hi! This landing page was designed and structured as a responsive web development project. It features clean sections, a mobile hamburger menu, light/dark theme switching, and interactive filter elements built with vanilla JavaScript.
+            </p>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-socials">
-                <a href="https://github.com" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-                <a href="mailto:student@example.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
-            </div>
-            <p>&copy; 2026 Aditya | Built as part of BCA Web Development Project Submission.</p>
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-16 px-4">
+        <div class="max-w-xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm">
+            <h2 class="text-2xl font-bold text-center mb-6">Get in Touch</h2>
+            <form id="contactForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Your Name</label>
+                    <input type="text" id="name" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Email Address</label>
+                    <input type="email" id="email" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Message</label>
+                    <textarea id="message" rows="4" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium transition">Send Message</button>
+                <p id="formStatus" class="text-center text-sm font-medium mt-2 text-green-600 hidden">Message sent successfully!</p>
+            </form>
         </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-8 border-t border-gray-200 dark:border-gray-800 text-center text-sm text-gray-500">
+        <p>&copy; 2026 SWYNEX. Built with HTML, Tailwind CSS & JavaScript.</p>
     </footer>
 
-    <!-- Interactive JavaScript Logic -->
+    <!-- JAVASCRIPT FOR INTERACTIVITY -->
     <script>
-        // 1. Mobile Hamburger Menu Toggle
-        const hamburgerBtn = document.getElementById('hamburgerBtn');
-        const navMenu = document.getElementById('navMenu');
-
-        hamburgerBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
 
-        // Close mobile nav menu when a link is clicked
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-            });
-        });
+        // Dark Mode Toggle Logic
+        const htmlElement = document.documentElement;
+        function toggleDarkMode() {
+            htmlElement.classList.toggle('dark');
+        }
+        document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
+        document.getElementById('darkModeToggleMobile').addEventListener('click', toggleDarkMode);
 
-        // 2. Dark / Light Mode Toggle
-        const themeToggleBtn = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const themeText = document.getElementById('themeText');
-
-        themeToggleBtn.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            
-            if (currentTheme === 'dark') {
-                document.documentElement.removeAttribute('data-theme');
-                themeIcon.className = 'fa-solid fa-moon';
-                themeText.textContent = 'Dark';
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                themeIcon.className = 'fa-solid fa-sun';
-                themeText.textContent = 'Light';
-            }
-        });
-
-        // 3. Interactive Project Filtering
+        // Project Filter Logic
         const filterBtns = document.querySelectorAll('.filter-btn');
         const projectCards = document.querySelectorAll('.project-card');
 
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Remove active class from all buttons
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-indigo-600', 'text-white');
+                    b.classList.add('bg-white', 'dark:bg-gray-800', 'border', 'border-gray-200', 'dark:border-gray-700');
+                });
+                btn.classList.add('bg-indigo-600', 'text-white');
+                btn.classList.remove('bg-white', 'dark:bg-gray-800', 'border');
 
-                const filterValue = btn.getAttribute('data-filter');
-
+                const filter = btn.getAttribute('data-filter');
                 projectCards.forEach(card => {
-                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                        card.style.display = 'flex';
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
                     } else {
                         card.style.display = 'none';
                     }
@@ -895,22 +237,15 @@
             });
         });
 
-        // 4. Contact Form Submission Handling
+        // Contact Form Submission Handler
         const contactForm = document.getElementById('contactForm');
-        const alertMessage = document.getElementById('alertMessage');
-
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent page reload
-            
-            // Display submission alert message
-            alertMessage.style.display = 'block';
-            
-            // Clear inputs
+        const formStatus = document.getElementById('formStatus');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            formStatus.classList.remove('hidden');
             contactForm.reset();
-
-            // Hide alert message after 4 seconds
             setTimeout(() => {
-                alertMessage.style.display = 'none';
+                formStatus.classList.add('hidden');
             }, 4000);
         });
     </script>
